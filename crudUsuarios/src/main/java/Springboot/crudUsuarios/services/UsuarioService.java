@@ -50,4 +50,13 @@ public class UsuarioService {
             return false;
         }
     }
+
+    public boolean eliminarTodo(){
+        try{
+            usuarioRepository.deleteAll();
+            return true;
+        }catch(Exception e){
+            return false;
+        }
+    }
 }
