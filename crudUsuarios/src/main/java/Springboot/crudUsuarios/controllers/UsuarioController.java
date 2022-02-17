@@ -1,6 +1,8 @@
 package Springboot.crudUsuarios.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Optional;
 
 import Springboot.crudUsuarios.models.UsuarioModel;
@@ -30,9 +32,31 @@ public class UsuarioController {
         return this.usuarioService.obtenerPorId(id);
     }
 
-    @GetMapping("/query")
+    @GetMapping("/queryPrioridad")
     public ArrayList<UsuarioModel> obtenerUsuarioPorPrioridad(@RequestParam("prioridad") Integer prioridad){
         return this.usuarioService.obtenerPorPrioridad(prioridad);
+    }
+
+    @GetMapping("/queryNombre")
+    public ArrayList<UsuarioModel> obtenerUsuarioPorNombre(@RequestParam("nombre") String nombre){
+        return this.usuarioService.obtenerPorNombre(nombre);
+    }
+
+    @GetMapping("/queryEdad")
+    public ArrayList<UsuarioModel> obtenerUsuarioPorEdad(@RequestParam("edad") Integer edad){
+        return this.usuarioService.obtenerPorEdad(edad);
+    }
+
+    @GetMapping("/ordenPorEdad")
+    public ArrayList<UsuarioModel> obtenerUsuariosOrdenadosPorEdad(){
+        ArrayList<UsuarioModel> lista = this.usuarioService.obtenerOrdenadosPorEdad();
+        Collections.sort(lista, new Comparator<UsuarioModel>() {
+            @Override
+            public int compare(UsuarioModel u1, UsuarioModel u2) {
+                return u1.getEdad().compareTo(u2.getEdad());
+            }
+        });
+        return lista;
     }
 
     @DeleteMapping(path="/{id}")
@@ -42,4 +66,5 @@ public class UsuarioController {
             return "Se eliminó correctamente el usuario con id "+id+".";
         return "No pudo eliminarse el usuario con id "+id+".";
     }
+
 }

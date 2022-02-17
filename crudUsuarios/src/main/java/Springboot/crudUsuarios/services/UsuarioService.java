@@ -15,7 +15,7 @@ public class UsuarioService {
     UsuarioRepository usuarioRepository;
 
     public ArrayList<UsuarioModel> obtenerUsuario(){
-        return(ArrayList<UsuarioModel>) usuarioRepository.findAll();
+        return (ArrayList<UsuarioModel>) usuarioRepository.findAll();
     }
 
     public UsuarioModel guardarUsuario(UsuarioModel usuario){
@@ -28,6 +28,18 @@ public class UsuarioService {
 
     public ArrayList<UsuarioModel> obtenerPorPrioridad(Integer prioridad){
         return usuarioRepository.findByPrioridad(prioridad);
+    }
+
+    public ArrayList<UsuarioModel> obtenerPorNombre(String nombre){
+        return usuarioRepository.findByNombre(nombre);
+    }
+
+    public ArrayList<UsuarioModel> obtenerPorEdad(Integer edad){
+        return usuarioRepository.findByEdad(edad);
+    }
+
+    public ArrayList<UsuarioModel> obtenerOrdenadosPorEdad(){
+        return (ArrayList<UsuarioModel>) usuarioRepository.findAll();
     }
 
     public boolean eliminarUsuario(Long id){
